@@ -34,6 +34,7 @@ class ChatServer:
             except:
                 break
 
+        self.socket.close()
         for client_socket in self.client_sockets:
             client_socket.close()
         print('exit')
