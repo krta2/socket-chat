@@ -42,10 +42,9 @@ class ChatServer:
         user = f'{addr[0]}:{addr[1]}'
         while True:
             try:
-                if connected_socket.fileno() == -1:
-                    break
-
                 data = connected_socket.recv(1024)
+                if not data.decode():
+                    break
 
                 # print received message
                 message = f'[{user}] {data.decode()}'
