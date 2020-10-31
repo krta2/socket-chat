@@ -27,6 +27,8 @@ class ChatClient:
             receiving_thread.start()
 
             while True:
+                if self.socket.fileno() == -1:
+                    break
                 time.sleep(1)
         except:
             self.socket.close()
