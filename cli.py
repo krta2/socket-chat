@@ -35,7 +35,8 @@ class ChatClient:
     def send(self):
         while True:
             try:
-                message = input('[You] ')
+                message = input()
+                print(f'[You] {message}')
                 self.socket.send(message.encode())
             except:
                 break
