@@ -42,6 +42,8 @@ class ChatClient:
             except:
                 break
 
+        self.socket.close()
+
     def receive(self):
         while True:
             try:
