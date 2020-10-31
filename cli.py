@@ -28,7 +28,7 @@ class ChatClient:
 
             while True:
                 if self.socket.fileno() == -1:
-                    break
+                    raise Exception('socket disconnected')
                 time.sleep(1)
         except:
             self.socket.close()
