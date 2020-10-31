@@ -34,10 +34,11 @@ class ChatServer:
             except:
                 break
 
+        # close sockets
         self.socket.close()
         for client_socket in self.client_sockets:
             client_socket.close()
-        print('exit')
+        print('\nexit')
 
     def run_chat_thread(self, connected_socket, addr):
         user = f'{addr[0]}:{addr[1]}'
