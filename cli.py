@@ -9,7 +9,7 @@ class ChatClient:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-    def connect(self, host, port):
+    def run(self, host, port):
         try:
             self.socket.connect((host, port))
 
@@ -20,14 +20,14 @@ class ChatClient:
             print(f'> Connected to the chat server ({num_online} user{"s" if num_online > 1 else ""} online)')
 
             # make and start threads for sending and receiving messages
-            sending_thread = threading.Thread(target=self.send)
-            receiving_thread = threading.Thread(target=self.receive)
+            sending_thread = threading.Thread(target=self.send, daemon=True)
+            receiving_thread = threading.Thread(target=self.receive, daemon=True)
 
             sending_thread.start()
             receiving_thread.start()
 
-            # while True:
-            #     time.sleep(1)
+            while True:
+                time.sleep(1)
         except:
             self.socket.close()
             print('\nexit')
@@ -39,16 +39,16 @@ class ChatClient:
                 print(f'[You] {message}')
                 self.socket.send(message.encode())
             except:
-                self.socket.close()
                 break
 
     def receive(self):
         while True:
             try:
                 data = self.socket.recv(1024)
+                if not data.decode():
+                    break
                 print(f'{data.decode()}')
             except:
-                self.socket.close()
                 break
 
 
@@ -56,4 +56,4 @@ host = sys.argv[1]
 port = int(sys.argv[2])
 
 chat_client = ChatClient()
-chat_client.connect(host, port)
+chat_client.run(host, port)
