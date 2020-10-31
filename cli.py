@@ -20,14 +20,14 @@ class ChatClient:
             print(f'> Connected to the chat server ({num_online} user{"s" if num_online > 1 else ""} online)')
 
             # make and start threads for sending and receiving messages
-            sending_thread = threading.Thread(target=self.send, daemon=True)
-            receiving_thread = threading.Thread(target=self.receive, daemon=True)
+            sending_thread = threading.Thread(target=self.send)
+            receiving_thread = threading.Thread(target=self.receive)
 
             sending_thread.start()
             receiving_thread.start()
 
-            while True:
-                time.sleep(1)
+            # while True:
+            #     time.sleep(1)
         except:
             self.socket.close()
             print('\nexit')
@@ -48,6 +48,7 @@ class ChatClient:
                 data = self.socket.recv(1024)
                 print(f'{data.decode()}')
             except:
+                self.socket.close()
                 break
 
 
