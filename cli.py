@@ -36,7 +36,8 @@ class ChatClient:
         while True:
             try:
                 message = input()
-                print(f'[You] {message}')
+                if message:
+                    print(f'[You] {message}')
                 self.socket.send(message.encode())
             except:
                 break
@@ -50,6 +51,8 @@ class ChatClient:
                 print(f'{data.decode()}')
             except:
                 break
+
+        self.socket.close()
 
 
 host = sys.argv[1]
