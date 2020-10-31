@@ -58,6 +58,7 @@ class ChatServer:
         # when socket closed
         # print left message and send it to other clients
         self.client_sockets.remove(connected_socket)
+        connected_socket.close()
         message = f'< The user {user} left ({self.get_online_user_status()})'
         print(message)
         for client_socket in self.client_sockets:
