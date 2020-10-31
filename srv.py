@@ -44,8 +44,6 @@ class ChatServer:
         while True:
             try:
                 data = connected_socket.recv(1024)
-                if not data.decode():
-                    break
 
                 # print received message
                 message = f'[{user}] {data.decode()}'

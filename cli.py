@@ -39,6 +39,7 @@ class ChatClient:
                 print(f'[You] {message}')
                 self.socket.send(message.encode())
             except:
+                self.socket.close()
                 break
 
     def receive(self):
