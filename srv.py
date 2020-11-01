@@ -74,8 +74,13 @@ class ChatServer:
         return f'{num_users} user{"s" if num_users > 1 else ""} online'
 
 
-host = sys.argv[1]
-port = int(sys.argv[2])
+def main():
+    host = sys.argv[1]
+    port = int(sys.argv[2])
 
-chat_server = ChatServer(host, port)
-chat_server.run()
+    chat_server = ChatServer(host, port)
+    chat_server.run()
+
+
+if __name__ == '__main__':
+    main()

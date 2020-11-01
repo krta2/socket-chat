@@ -59,8 +59,13 @@ class ChatClient:
         self.socket.close()
 
 
-host = sys.argv[1]
-port = int(sys.argv[2])
+def main():
+    host = sys.argv[1]
+    port = int(sys.argv[2])
 
-chat_client = ChatClient()
-chat_client.run(host, port)
+    chat_client = ChatClient()
+    chat_client.run(host, port)
+
+
+if __name__ == '__main__':
+    main()
