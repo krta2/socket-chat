@@ -1,6 +1,8 @@
 # socket-chat
 multi-client chatting program
 
+![flowchart](flowchart.png)
+
 ## Environments
 - Python3
 - Ubuntu
